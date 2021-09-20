@@ -6,6 +6,7 @@ use crossterm::{QueueableCommand, cursor};
 use std::io::{Write, stdout};
 use strip_markdown::*;
 use std::process;
+use rand::Rng;
 
 fn main() {
     let matches = App::new("Daily Programmer")
@@ -102,8 +103,8 @@ fn main() {
     }
     let mut delete = Vec::new();
     if matches.is_present("Number") {
-        for x in 0..difficult.len() {
-            if difficult[x] != matches.value_of("Number").unwrap() {
+        for x in 0..number.len() {
+            if number[x] != matches.value_of("Number").unwrap() {
                 delete.push(x);
             }
         }
@@ -117,14 +118,13 @@ fn main() {
         dates.remove(x-deleted);
         deleted += 1;
     }
-
     if number.len() == 0 {
         println!("I have not found anything of what you wanted try and make your search more simple");
         process::exit(1);
     }
     
-    use rand::seq::SliceRandom;
-    let x:usize = number.choose(&mut rand::thread_rng()).unwrap().parse().unwrap();
+    let x:usize = rand::thread_rng().gen_range(0..number.len());
+    println!("{}", x);
     println!("   [{}] Challenge #{} [{}] {}   ", dates[x].clone(), number[x].clone(), difficult[x].clone(), names[x].clone());
     let mut line = "".to_string();
     for x in 0..["   [", dates[x].as_str(), "] Challenge #", number[x].as_str(), " [", difficult[x].as_str(), "] ", names[x].as_str(), "   "].join("").to_string().len() {
