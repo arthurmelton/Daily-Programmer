@@ -85,10 +85,6 @@ fn main() {
     }
     let mut delete = Vec::new();
     if matches.is_present("Type") {
-        if !["easy", "intermediate", "difficult"].contains(&matches.value_of("Type").unwrap()) {
-            println!("You can only put the type as easy, intermediate, difficult");
-            process::exit(1);
-        }
         for x in 0..difficult.len() {
             if difficult[x] != matches.value_of("Type").unwrap() {
                 delete.push(x);
