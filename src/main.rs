@@ -15,7 +15,7 @@ fn main() {
         .arg(Arg::with_name("Type")
             .short("t")
             .long("type")
-            .help("lets the difficulty easy, intermediate, difficult")
+            .help("lets the difficulty easy, intermediate, hard, difficult, bonus")
             .takes_value(true))
         .arg(Arg::with_name("Number")
             .short("n")
@@ -131,7 +131,7 @@ fn main() {
         line.push_str("-");
     }
     println!("{}", line);
-    println!("{}",  strip_markdown(&text[x]).replace("\\n", "\n"));
+    println!("{}",  strip_markdown(&text[x]).replace("\\n", "\n").replace("\\t", "\t"));
 }
 
 fn name(name:String) -> Vec<String> {
